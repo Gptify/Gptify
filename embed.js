@@ -3,7 +3,7 @@ const createChatBubble = () => {
     const currentScriptTag = document.currentScript;
     const bubbleColor = currentScriptTag.getAttribute("data-bg-color") || '#5e81f7';
     const chatId = currentScriptTag.getAttribute("data-chat-id");
-    let src = `https://gptify.io/static/iframe.html?chatId=${chatId}`;
+    let src = `https://gptify.io/chatbot-iframe?chatId=${chatId}`;
 
     const chatBubble = document.createElement("div");
     chatBubble.addEventListener('click', function() {
