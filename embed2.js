@@ -10,9 +10,16 @@ const chatBubble = document.createElement("div");
 chatBubble.addEventListener('click', function() {
     this.classList.toggle('active');
   });
+    
+const bubblePlacement = await fetchBubblePlacement();
+
+if (bubblePlacement === '0') {
+  chatBubble.style.right = "20px";
+} else {
+  chatBubble.style.left = "20px";
+}
 chatBubble.style.position = "fixed";
 chatBubble.style.bottom = "20px";
-chatBubble.style.right = "20px";
 chatBubble.style.width = "64px";
 chatBubble.style.height = "64px";
 chatBubble.style.borderRadius = "32px";
@@ -79,10 +86,14 @@ chatBubble.innerHTML = `
 </style>`;
 
 const iframe = document.createElement("iframe");
+if (bubblePlacement === '0') {
+  iframe.style.right = "20px";
+} else {
+  iframe.style.left = "20px";
+}
 iframe.src = src;
 iframe.style.position = "fixed";
 iframe.style.bottom = "90px";
-iframe.style.right = "20px";
 iframe.style.width = "400px";
 iframe.style.height = "500px";
 iframe.style.borderRadius = "15px";
@@ -130,20 +141,17 @@ iframe.onload = () => {
 document.body.appendChild(chatBubble);
 document.body.appendChild(iframe);
 
-const customColor = await fetchCustomColor();
-
-
   
 };
   
-const fetchCustomColor = async () => {
+const fetchBubblePlacement = async () => {
   try {
-    const response = await fetch(`https://gptify.io/get-custom-color?chatId=${chatId}`);
+    const response = await fetch(`https://gptify.io/get-bubble-placement?chatId=${chatId}`);
     const data = await response.json();
-    return data.color;
+    return data.bubbleplacement;
   } catch (error) {
-    console.error("Error fetching custom color:", error);
-    return null;
+    console.error("Error fetching bubble placement:", error);
+    return '0';
   }
 };
 
