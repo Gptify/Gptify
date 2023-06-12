@@ -4,7 +4,7 @@ const chatId = currentScriptTag.getAttribute("data-chat-id");
 
 const createChatBubble = async () => {
 
-let src = `https://gptify.io/chatbot-iframe?chatId=${chatId}`;
+let src = `https://chatflux.io/chatbot-iframe?chatId=${chatId}`;
 
     
 const bubblePlacement = await fetchBubblePlacement();
@@ -139,7 +139,7 @@ document.body.appendChild(iframe);
   
 const fetchBubblePlacement = async () => {
   try {
-    const response = await fetch(`https://gptify.io/get-bubble-placement?chatId=${chatId}`);
+    const response = await fetch(`https://chatflux.io/get-bubble-placement?chatId=${chatId}`);
     const data = await response.json();
     console.log(data.bubbleplacement);
     return data.bubbleplacement;
